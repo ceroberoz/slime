@@ -26,5 +26,22 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
+// Create and configure Slim app
+$config = ['settings' => [
+    'addContentLengthHeader' => false,
+]];
+$app = new \Slim\App($config);
+
+// Define app routes
+$app->get('/hello/{name}', function ($request, $response, $args) {
+    // $hello = $response->write("Hello " . $args['name']);
+
+    $return = array(
+      'Name' => $args['name']
+    );
+
+    echo json_encode($return);
+});
+
 // Run app
 $app->run();
